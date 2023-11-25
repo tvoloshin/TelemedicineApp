@@ -26,8 +26,9 @@ fun postDataUsingRetrofit(
 //    job: MutableState<TextFieldValue>,
 //    result: MutableState<String>
 ) {
-//    val url = "http://b253-85-143-112-90.ngrok-free.app"
-    val url = "http://192.168.0.108:8000"
+    val url = "https://b685-85-143-112-84.ngrok-free.app"
+//    val url = "http://localhost:8000"
+//    val url = "http://192.168.0.108:8000"
 //    val url = "http://10.164.5.106:8000"
     val retrofit = Retrofit.Builder()
         .baseUrl(url)
