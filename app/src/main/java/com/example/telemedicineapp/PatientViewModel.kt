@@ -23,4 +23,10 @@ class PatientViewModel(
     fun getPatients(): List<Patient> {
         return dao.getPatients()
     }
+
+    fun savePatients(patient: Patient) {
+        viewModelScope.launch {
+            dao.upsertPatient(patient)
+        }
+    }
 }

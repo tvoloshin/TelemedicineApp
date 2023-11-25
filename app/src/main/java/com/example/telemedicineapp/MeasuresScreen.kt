@@ -45,7 +45,8 @@ import com.lepu.blepro.objs.Bluetooth
 fun MeasuresScreen(
     navController: NavController,
     state: MeasureState,
-    onEvent: (MeasureEvent) -> Unit
+    onEvent: (MeasureEvent) -> Unit,
+    newMeasureFor: Int
 ) {
     val mContext = LocalContext.current
     BleMeasurements.scanForResult(mContext as ComponentActivity, onEvent)
@@ -73,6 +74,7 @@ fun MeasuresScreen(
                         BleServiceHelper.BleServiceHelper.bpmGetFileList(Bluetooth.MODEL_BPM)
 //                BleMeasurements.scanForResult(mContext as ComponentActivity, onEvent)
                         onEvent(MeasureEvent.ShowDialog)
+                        navController.navigate("patients")
                     }) {
                         Icon(
                             imageVector = Icons.Default.Add,
@@ -83,7 +85,9 @@ fun MeasuresScreen(
             )
         },
         ) { _ ->
-        if(state.isAddingMeasure) {
+        Log.d("asd", "newMeasureFor = $newMeasureFor")
+        if(newMeasureFor != 0) {
+            onEvent(MeasureEvent.SetPatientId(newMeasureFor))
             AddMeasureDialog(navController = navController, state = state, onEvent = onEvent)
         }
         LazyColumn(

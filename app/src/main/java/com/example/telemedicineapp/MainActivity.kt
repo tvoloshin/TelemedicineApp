@@ -33,6 +33,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import androidx.room.Room
 import com.example.telemedicineapp.data.MeasuresDatabase
 import com.example.telemedicineapp.ui.theme.TelemedicineAppTheme
@@ -239,9 +240,17 @@ class MainActivity : ComponentActivity() {
 fun Navigation(patientViewModel: PatientViewModel, measureViewModel: MeasureViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main") {
-        composable("main") {
+        composable(
+            "main?newMeasureFor={newMeasureFor}",
+            arguments = listOf(navArgument("newMeasureFor") { defaultValue = 0 })
+        ) {
             val state by measureViewModel.state.collectAsState()
-            MeasuresScreen(navController = navController, state = state, onEvent = measureViewModel::onEvent)
+            MeasuresScreen(
+                navController = navController,
+                state = state,
+                onEvent = measureViewModel::onEvent,
+                it.arguments!!.getInt("newMeasureFor")
+            )
         }
         composable("patients") {
             PatientsList(navController = navController, viewModel = patientViewModel)

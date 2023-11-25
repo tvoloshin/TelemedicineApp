@@ -41,7 +41,7 @@ fun AddMeasureDialog(
                 TextField(
                     value = state.patientID?.toString() ?: "",
                     onValueChange = {
-                        onEvent(MeasureEvent.SetPatientId(it.toIntOrNull() ?: state.patientID))
+//                        onEvent(MeasureEvent.SetPatientId(it.toIntOrNull() ?: state.patientID))
                     },
                     placeholder = {
                         Text(text = "Patient ID")
@@ -59,6 +59,7 @@ fun AddMeasureDialog(
             ) {
                 Button(onClick = {
                     onEvent(MeasureEvent.SaveMeasure)
+                    navController.navigate("main")
                 }) {
                     Text(text = "Save")
                 }
