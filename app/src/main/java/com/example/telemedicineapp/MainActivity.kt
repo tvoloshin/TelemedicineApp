@@ -253,6 +253,7 @@ fun Navigation(patientViewModel: PatientViewModel, measureViewModel: MeasureView
             )
         }
         composable("patients") {
+//            val state by patientViewModel.state.collectAsState()
             PatientsList(navController = navController, viewModel = patientViewModel)
         }
     }

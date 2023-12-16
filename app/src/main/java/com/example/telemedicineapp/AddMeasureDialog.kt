@@ -33,11 +33,6 @@ fun AddMeasureDialog(
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Button(onClick = {
-                    navController.navigate("patients")
-                }) {
-                    Text(text = "Save")
-                }
                 TextField(
                     value = state.patientID?.toString() ?: "",
                     onValueChange = {

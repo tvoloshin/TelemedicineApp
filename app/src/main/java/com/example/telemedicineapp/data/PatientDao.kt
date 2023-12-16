@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PatientDao {
     @Query("SELECT * FROM Patient")
-    fun getPatients(): List<Patient>
+    fun getPatients(): Flow<List<Patient>>
 
     @Upsert
     suspend fun upsertPatient(patient: Patient)

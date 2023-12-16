@@ -3,8 +3,6 @@ package com.example.telemedicineapp.api
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.text.input.TextFieldValue
 import com.example.telemedicineapp.data.Measure
 import com.example.telemedicineapp.data.Patient
 import retrofit2.Call
@@ -16,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //    val url = "http://b253-85-143-112-90.ngrok-free.app"
 //const val url = "http://192.168.0.108:8000"
-const val url = "https://127.0.0.1:8000"
+const val url = "https://0462-85-143-112-242.ngrok-free.app"
 //    val url = "http://10.164.5.106:8000"
 
 val retrofit: Retrofit = Retrofit.Builder()
@@ -46,13 +44,14 @@ fun postDataUsingRetrofit(
         }
 
         override fun onFailure(call: Call<Measure?>, t: Throwable) {
+            t.message?.let { Log.d("api fail", it) }
             Toast.makeText(ctx, "Request failed: " + t.message, Toast.LENGTH_SHORT).show()
 //            result.value = "Error found is : " + t.message
         }
     })
 }
 
-fun getDataUsingRetrofit(
+fun getPatientsUsingRetrofit(
     ctx: Context,
     onSuccess: (List<Patient>?) -> Unit
 ) {
